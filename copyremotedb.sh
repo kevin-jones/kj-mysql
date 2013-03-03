@@ -1,8 +1,7 @@
 #!/bin/sh
 # MySQL Database Copy - Replace local database with remote version 
-# by kevin.jones@tecmark.co.uk
 # https://github.com/kevin-jones/kj-mysql
-# v0.3
+# v0.3.1
 
 # This script is most useful when developing a website on your local machine.
 # Running the script will replace a local MySQL database with one from a remote server.
@@ -19,11 +18,14 @@
 # 4. Give the script executable permissions (e.g. chmod +x copyremotedb.sh)
 # 5. Amend the configuration below for default settings
 
-# Config
+# Config (DEFAULT options can be overridden at run time)
 
+# the hostname of the server you SSH in to
 DEFAULT_REMOTE_SERVER=
-DEFAULT_REMOTE_MYSQL_USERNAME=
+# Your SSH username (script assumes you have SSH keys in place for passwordless SSH)
 DEFAULT_SSH_USERNAME=
+# MySQL username on the server
+DEFAULT_REMOTE_MYSQL_USERNAME=
 
 # if your local machine uses "root" mysql username and an empty password, the following settings can be left as they are
 LOCAL_MYSQL_USERNAME=root
@@ -43,8 +45,6 @@ read user
 echo "Remote MySQL User [$DEFAULT_SSH_USERNAME]"
 read remote_mysql_username
 : ${remote_mysql_username:="$DEFAULT_SSH_USERNAME"}
-
-echo "-----------------------"
 
 echo "Remote MySQL Password"
 read remote_mysql_password
